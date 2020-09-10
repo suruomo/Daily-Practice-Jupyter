@@ -1,0 +1,56 @@
+$pyNastran: version=msc
+$pyNastran: punch=False
+$pyNastran: encoding=utf-8
+$pyNastran: nnodes=4
+$pyNastran: nelements=5
+$EXECUTIVE CONTROL DECK
+SOL 200
+CEND
+$CASE CONTROL DECK
+DESOBJ = 102
+DESSUB = 10000
+SUBCASE 1
+    ANALYSIS = SAERO
+    LOAD = 1
+    METHOD = 42
+    SPC = 1
+    TRIM = 42
+BEGIN BULK
+$NODES
+GRID           1              0.      0.      0.
+GRID           2              1.      0.      0.
+GRID           3              1.      1.      0.
+GRID           4              0.      1.      0.
+$ELEMENTS
+CBAR          10     100       1       2      0.      0.      1.
+CBAR          11     100       2       3      0.      0.      1.
+CBAR          12     100       3       4      0.      0.      1.
+CBAR          13     100       4       1      0.      0.      1.
+CQUAD4        15     101       1       2       3       4
+$PROPERTIES
+PBARL        100    1000             BOX
+              3.      3.      1.      1.      0.
+PSHELL       101    1000      .1    1000            1000
+$MATERIALS
+MAT1        1000    3.+7              .3
+$LOADS
+$ load
+PLOAD4         1      15      1.
+               0      0.      0.      0.    SURF
+PLOAD1         1      10      FZ      LE      0.      1.      0.      1.
+$DYNAMIC
+EIGRL         42                      42
+$SPCs
+SPC1           1  123456       1
+$OPTIMIZATION
+DCONSTR    10000     101 -35000.  35000.
+DESVAR         1   DIM1       .1  .00001
+DESVAR         2   DIM2       .2  .00001
+DESVAR         3   DIM3       .3  .00001
+DESVAR         4   DIM4       .4  .00001
+DESVAR         5    DV5       .1  .00001
+DRESP1       100   resp1  STRESS  PSHELL               9             101
+DRESP1       101   resp1  STRESS  PSHELL              17             101
+DRESP1       102      WT  WEIGHT                                     ALL
+DVPREL1     1000  PSHELL     101       T
+               1      1.
