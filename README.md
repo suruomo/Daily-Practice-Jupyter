@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-da
-=======
-疫情监控爬虫笔记
->>>>>>> master
+#### 爬取腾讯疫情数据练习--spider
+#### pyNastran库练习--nastran
+
