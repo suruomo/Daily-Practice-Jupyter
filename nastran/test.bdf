@@ -1,0 +1,24 @@
+$pyNastran: version=msc
+$pyNastran: punch=False
+$pyNastran: encoding=utf-8
+$pyNastran: nnodes=2
+$pyNastran: nelements=1
+$EXECUTIVE CONTROL DECK
+SOL 101
+CEND
+$CASE CONTROL DECK
+DESOBJ = 101
+LOAD = 8
+BEGIN BULK
+$NODES
+GRID           1              0.      0.      0.
+GRID           2              0.      8.      0.
+$ELEMENTS
+CROD           1      15       1       2
+$PROPERTIES
+PROD          15       5  .04909
+$MATERIALS
+MAT1           5    3.+7              .3
+$LOADS
+$载荷
+FORCE          8       2              0.     20.      0.      1.
